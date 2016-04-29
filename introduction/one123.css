@@ -1,0 +1,98 @@
+body{
+	background: #202020;
+	margin: 0;
+	font:courier 12px;
+}
+div{
+	display: block;
+}
+div#contant{
+	margin: 5em auto;
+	width: 70%;
+	border: 1px solid #696969;
+}
+
+div#menuContant{
+	float: left;
+	position:fixed;
+	width: 15.8%;
+	padding:3em 0em;
+	background:rgb(91,96,98);
+	
+}
+div.headPicture{
+	text-align: center;
+	margin-bottom: 4em;
+	min-width: 20%;
+	max-width:100%;
+}	
+p#name{
+	font: 24px verdana bold;
+}
+p#place{
+	font:15px KaiTi;
+}
+div#headPicture ul{
+	background:rgb(91,96,98);
+}
+div#menu li{
+	display: block;
+	padding:2em 0.5em;
+	margin-right:2em;
+	text-align:center;
+	height: 2em;
+	border-top: 1px black solid;
+	font:25px KaiTi;
+}
+a:link{text-decoration:none; 
+	color:black;
+}
+a:visited{text-decoration:none; 
+	color:black;
+}
+a:active{text-decoration: none;
+	color:black;
+}
+div.potatoContant{
+	width:77.48%;
+	float: right;
+	position: relative;
+	background: white;
+	text-align: center;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	margin-bottom: 1em;
+}
+.potatoContant img{
+
+	 max-width: 80%;
+}
+#meanWord{
+	display: block;
+	padding-top: 3em;
+	font-size:0.4em;
+	position: relative;
+	top: 2em;
+}
+h2{
+	font-size: 30px;
+	font-family: SimHei;
+	margin-top: 2em;
+}
+hr{
+	border: 0;
+}
+
+.potatoContant p{
+	font-size:1.1em; 
+	font-color:rgb(142,140,139);
+	font-family: Microsoft YaHei;
+	display: block;
+	padding:0em 10em;
+}
+li#skillList{
+	margin: 0 20em;
+	font-family:Microsoft YaHei; 
+}
+
+
