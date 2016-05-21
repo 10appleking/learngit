@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta content="duhoot web">
+	<meta content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="duhoot.css"/>
+	<script src="duhoot.js"></script>
+	<script type="text/javascript" src="jquery-2.2.3.min.js"></script>
+	<title>duhoot</title>
+
+	<script type="text/javascript">
+
+//**************************************************//
+//版本：duhoot2.0.html     													//
+//编写时间：05.21 6：00-05.21 22：00								//
+//改进：修改少量代码结构（post）  									//
+//			加了图片轮播，登陆框，一些动画，图片点击放大//
+//不足：功能没做全，foot的表单验证									//
+//			post的图片没替换														//
+//			图片轮播本想用自己方法（css3）写的，但是没时间//
+//			忘记时间（--）															//
+//**************************************************//    
+
+//图片轮播参考
+$(document).ready(function(){
+    $(".imageRotation").each(function(){
+        // 获取有关参数
+        var imageRotation = this,  // 取得 图片轮换容器
+            imageBox = $(imageRotation).children(".imageBox")[0],  // 取得 图片容器
+            icoBox = $(imageRotation).children(".icoBox")[0],  // 取得 图标容器
+            icoArr = $(icoBox).children(),  // 取得所有图标，并保存为数组
+            imageWidth = $(imageRotation).width(),  // 图片宽度
+            imageNum = $(imageBox).children().size(),  // 图片数量
+            imageReelWidth = imageWidth*imageNum,  // 图片容器宽度
+            activeID = parseInt($($(icoBox).children(".active")[0]).attr("rel")),  // 当前图片ID
+            nextID = 0,  // 下张图片ID
+            setIntervalID,  // setInterval() 函数ID
+            intervalTime = 3000,  // 间隔时间
+            speed =500;  // 执行速度
+       
+        // 设置 图片容器 的宽度
+        $(imageBox).css({'width' : imageReelWidth + "px"});
+       
+        // 图片轮换函数
+        var rotate=function(clickID){
+            if(clickID){ nextID = clickID; }
+            else{ nextID=activeID<=3 ? activeID+1 : 1; }
+           
+            $(icoArr[activeID-1]).removeClass("active");
+            $(icoArr[nextID-1]).addClass("active");
+            $(imageBox).animate({left:"-"+(nextID-1)*imageWidth+"px"} , speed);
+           
+            activeID = nextID;
+        }
+        setIntervalID=setInterval(rotate,intervalTime);
+       
+        $(imageBox).hover(
+            function(){ clearInterval(setIntervalID); },
+            function(){ setIntervalID=setInterval(rotate,intervalTime); }
+        );   
+       
+        $(icoArr).click(function(){
+            clearInterval(setIntervalID);
+            var clickID = parseInt($(this).attr("rel"));
+            rotate(clickID);
+            setIntervalID=setInterval(rotate,intervalTime);
+        });
+    });
+});
+	</script>
+</head>
+	
+	<body id="body">
+		<div id="wrapper">
+		<img src="postHouse.png" id="postEnlarge" width="80%">
+			<div id="header">
+					<a href="#" class="duhootLogo">
+						<img src="duhoot_0001s_0006_Vector-Smart-Object.png" alt="duhoot web logo"/>
+					</a>
+					<ul class="headerMeunItem" id="headerMeunItem">
+						<li><a href="#reality">REALITY</a></li>
+						<li><a href="#living">LIVING</a></li>
+						<li><a href="#education">EDUCATION</a></li>
+						<li><a href="#enterainment" >ENTERTAINMENT</a></li>
+						<li><a href="#mobility">MOBILITY</a></li>
+					</ul>	
+					<div id="headerLogin">
+						<div id="searchLogo">
+							<a href="#">
+								<img src="searchlogo.png" alt="magnifie logo" title="search">
+							</a>
+						</div>
+						<div id="loginBox">
+							<a href="#">
+								<img src="duhoot_0001s_0002_.png" alt="person picture">
+								<p id="login" onClick="show()">LOGIN</p>
+							</a>
+							<div id="mask" class="mask"></div>
+   						<div id="enter" class="enter"><!--这是弹出的模式窗口层-->
+       				<!--嵌套在层中的层，用来做标题栏，按个人需求定义-->
+      				<div id="div3" align="right">
+      					<span class="welcome">欢迎登录Duhoot!</span>
+        				<label onClick="closeShow()">close</label>
+        				<form id="loginform" method="post" name="login" >
+        				<!-- action="http://www.123er.com/logging.php?action=login&amp;loginsubmit=true" -->
+ 
+								<!--          <input type="hidden" name="formhash" value="{FORMHASH}" />
+          			<input type="hidden" name="cookietime" value="2592000" />
+        			 	<input type="hidden" name="loginfield" value="username" /> -->
+          				<span class="username">用户名</span>
+        			 		<input type="text" id="username" name="username" size="30" maxlength="80" tabindex="3"/></br>
+        			 		<p id="count">0个字符</p>
+           				<span class="password"> 密码</span>
+        					<input name="password" type="password" id="password" tabindex="2" onkeypress="if((event.keyCode ? event.keyCode : event.charCode) == 13) $('loginform').submit()" size="15" />
+      						<button name="userlogin" id="ok">Log in</button>
+								</form> 
+							</div>
+							</div>
+        			<!--用来关闭显示，在label中加了onclick事件，与鼠标悬停手的样式--> 
+      		</div>
+			</div>
+			</div>
+			<div id="search">
+				<div class="imageRotation">
+					<div class="imageBox">
+						<a href="#"><img src="img1.png" alt=""></a>
+						<a href="#"><img src="img2.png" alt=""></a>
+						<a href="#"><img src="img1.png" alt=""></a>
+						<a href="#"><img src="img2.png" alt=""></a>
+					</div>
+					<div class="icoBox">
+						<span class="active" rel="1">1</span>
+        		<span rel="2">2</span>
+        		<span rel="3">3</span>
+        		<span rel="4">4</span>
+					</div>
+				</div>
+					<div class="chooseCountryArtBox">
+					<h2>What are you looking for?</h2>
+					<div id="chooseCountry">
+						<a href="javascript:void(0);">Dubai</a>
+					</div>
+        		<ul id="selectCountry">
+           		<li><a href="javascript:void(0);"><span>Dubai</span></li>
+            	<li><a href="javascript:void(0);"><span>Paris</span></li>
+            	<li><a href="javascript:void(0);"><span>Sydney</span></li>
+           		<li><a href="javascript:void(0);"><span>NewYork</span></li>
+      			</ul>			
+						<div id="chooseArt"><a href="javascript:void(0)">Education</a></div>
+        			<ul id="selectArt">
+           			<li><a href="javascript:void(0);"><span>Dubai</span></li>
+            		<li><a href="javascript:void(0);"><span>Paris</span></li>
+            		<li><a href="javascript:void(0);"><span>Sydney</span></li>
+           			<li><a href="javascript:void(0);"><span>NewYork</span></li>
+      				</ul>
+					</div>
+					<!-- 表单验证（正则表达式） -->
+					<div id="inputContanier">
+						<input type="text" placeholder="Keyword,name,date,..."  class="inputBox" onclick="this.value =''"/>
+					</div>
+					<a href="#">
+						<div id="button"><p>SEARCH</p></div>
+					</a>
+			</div>
+				<!-- 表单验证（正则表达式） -->
+			<div id="filter">
+				<div id="filterBox">
+				<ul class="filterWord">
+					<li><a href="#">RECOMMEDED</a></li>
+					<li><a href="#">LATEST</a></li>
+					<li><a href="#">HIGHLIGHTS</a></li>
+				</ul>
+				<div id="filterSelectContanier"><a href="#">Dubai</a></div>
+        				<!-- <ul id="select">
+           					<li><a href="javascript:void(0);"><span>Dubai</span></li>
+            				<li><a href="javascript:void(0);"><span>Paris</span></li>
+            				<li><a href="javascript:void(0);"><span>Sydney</span></li>
+           					<li><a href="javascript:void(0);"><span>NewYork</span></li>	
+      					 </ul> -->
+				<div class="hidnMap">
+					<a href="#">HIDE MAP</a>
+					<a href="#">
+						<img src="maplogo.png" alt="map logo">
+					</a>
+				</div>
+				<div id="filterLogo">
+					<span>FILTER: </span>
+					<ul class="filterLogo">
+						<li><img src="house.png" alt="house"/></li>
+						<li><img src="person.png" alt="person"/></li>
+						<li><img src="hat.png" alt="hat logo"></li>
+						<li><img src="music.png" alt="music"/></li>
+						<li><img src="bus.png" alt="bus logo"/></li>
+					</ul>
+				</div>
+				</div>
+			</div>
+			<div id="post">
+				<ul class="post">
+					<li>
+						<a href="javascript:void(0);">
+							<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="# " onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<ul class="readMore">
+					<li>
+						<a href="#">
+							<div class="readMoreImg">
+								<img src="read.png" alt="post house">
+							</div>
+							<div class="readMorePriPg">
+								<img src="Ellipse 2 copy 5.png" alt="head prictuer"/>
+								<div class="readMoreWordContanier">
+									<h2><a href="#">LUCY-P</a></h2>
+									<p><a href="#">xxx xxx xxxxx xxxxxx xxxxxxx xxxxxxx xxxxxxx xxxxx xxxxxx xxxxxx...</a>
+										<a href="#" class="readmoreStrong">
+											<strong>read more</strong>
+										</a> 
+									</p>	
+								</div>	
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="readMoreImg">
+								<img src="read.png" alt="post house">
+							</div>
+							<div class="readMorePriPg">
+								<img src="Ellipse 2 copy 5.png" alt="head prictuer"/>
+								<div class="readMoreWordContanier">
+								<h2>LUCY-P</h2>
+								<p>xxx xxx xxxxx xxxxxx xxxxxxx xxxxxxx xxxxxxx xxxxx xxxxxx xxxxxx
+									<a href="#" class="readmoreStrong">
+										<strong>...read more</strong>
+									</a> 
+								</p>	
+								</div>	
+							</div>
+						</a>
+					</li>
+				</ul>	
+				<ul class="post">
+					<li>
+					<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+					<li>
+					<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+					<li>
+					<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<ul class="readMore">
+					<li>
+						<a href="#">
+							<div class="readMoreImg">
+								<img src="read.png" alt="post house">
+							</div>
+							<div class="readMorePriPg">
+								<img src="Ellipse 2 copy 5.png" alt="head prictuer"/>
+								<div class="readMoreWordContanier">
+								<h2>LUCY-P</h2>
+								<p>xxx xxx xxxxx xxxxxx xxxxxxx xxxxxxx xxxxxxx xxxxx xxxxxx xxxxxx
+									<a href="#" class="readmoreStrong">
+										<strong>...read more</strong>
+									</a>	 
+								</p>	
+								</div>	
+							</div>
+						</a>
+					</li>
+				</ul>
+				<ul class="post postLast">
+					<li>
+						<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+						<div class="topHouse">
+								<img src="post_house.png" alt="house logo" width="50%" />
+							</div>
+							<div class="postImg">
+								<span class="price">$2,321</span>
+								<div class="hoverMask">
+									<a href="javascript:void(0);" onclick="showpost()">show more</a>
+								</div>
+							</div>
+							<div class="postHouseInformnation">
+								<h2><a href="#">2 bedroom house for rent in Dubai</a></h2>
+								<p class="informnation"><a href="#">VISION AGENCY</a></p>
+								<img src="fourstar.png" alt="four star"/>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<a href="#" class="loadMoreLink">Load more→</a>
+			</div>		
+			<div id="offer">
+				<h2>What can DuHoot offer to you?</h2>
+				<p>Etiam cursus ipsum quis enim faucibus</p>
+				<ul class="fiveLogoList">
+					<li >
+						<a href="javascript:void(0);">
+							<img src="foot_house.png" id="rotation1" class="rotation" >
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="foot_girl.png" id="rotation2"class="rotation">
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="foot_hat.png"id="rotation3"class="rotation">
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="foot_music.png"id="rotation4"class="rotation">
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="foot_bus.png"id="rotation5"class="rotation">
+						</a>
+					</li>
+				</ul>	
+				<div class="offerContanier">
+					<a href="#" class="reality">Reality</a>
+					<div class="offerLeft">
+						<img src="offerlogo.png" alt="">
+						<p>Cum sociis natoque penatibus et magnis dis parturient montes,nasceturri ridiculus mus.Morbi gravida tellus in purus pharetra.velx xxxxx xxxx xxxxx xxxxx xxxx xxxxx xxxx</p>
+					</div>
+					<div class="offerLeft">
+						<img src="offerlogo.png" alt="">
+						<P>Cum sociis natoque penatibus et magnis dis parturient montes,nasceturri ridiculus mus.Morbi gravida tellus in purus pharetra.velx xxxxx xxxx xxxxx xxxxx xxxx xxxxx xxxx</P>
+					</div>
+				</div>
+			</div>	
+			<div id="footer">
+				<div class="footerContanier">
+					<h2> Subscribe to our newsletter</h2>
+					<div id="subscribeContanier">
+						<input type="text" placeholder="your@email.com"  class="inputBox" />
+					</div>
+					<a href="#">
+						<div id="subscribeButter">
+							<p>SUBRICE</p>
+						</div>
+					</a>
+					<hr/>
+					<div class="ipsum">
+						<h3>Ipusm quls</h3>
+						<ul class="ipsumQuis">
+							<li>Aliquam qus</li>
+							<li>Pulvinar purus</li>
+							<li>Etiam cursus</li>
+							<li>Ipsum quis</li>
+							<li>Enim faucibus</li>
+						</ul>
+					</div>
+					<div class="ipsum">
+						<h3>Ipusm quls</h3>
+						<ul class="ipsumQuis">
+							<li>Aliquam qus</li>
+							<li>Pulvinar purus</li>
+							<li>Etiam cursus</li>
+							<li>Ipsum quis</li>
+							<li>Enim faucibus</li>
+						</ul>
+					</div>
+					<div class="social">
+						<h3>Fllows us</h3>
+						<ul class="socialLogo">
+							<li>
+								<a href="#" class="facebook">
+									<img src="facebook.png" alt="facebook">
+								</a>
+							</li>
+							<li>
+								<a href="#"class="twitter">
+									<img src="twitter.png" alt="twitter">
+								</a>
+							</li>
+							<li>
+								<a href="#" class="goole">
+									<img src="goole.png" alt="goole">
+								</a>
+							</li>
+							<li>
+								<a href="#" class="youtube">
+									<img src="youtube.png" alt="youtube">
+								</a>
+							</li>	
+						</ul>
+					<p>Coryright All Right reserved</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>         
+</html>

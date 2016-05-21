@@ -1,0 +1,858 @@
+
+/***************************/
+/**编写时间：05.17-05.21****/
+/**版本：duhoot2.1.css  ****/
+/**不足：优化不完全     ****/
+/*												**/
+/***************************/
+body{
+	margin: 0;
+	padding: 0;
+	font-family: Microsoft YaHei;
+	font-size: 12px;
+}
+#wapper{
+	width:100%;
+	margin:0 auto;
+	padding: 0;
+}
+a{
+	text-decoration: none;
+}
+/*---------------------------------------------------*/
+/****对header总体的设置******/
+#header{
+	margin:0 auto;
+	width:1170px;
+	height: 81px;
+	min-width:60%;
+	
+}
+/****对header总体的设置******/
+.duhootLogo{
+	float: left;
+	padding:15px;
+	height: 50px;
+}
+.headerMeunItem{
+	text-align: center;
+}
+
+.headerMeunItem>li{
+	float: left;
+	list-style: none;
+	padding:0 15px 15px 15px;
+	margin:10px 5px 0;
+}
+.headerMeunItem>li>a{
+	display: block;
+	height: 65px;
+	line-height: 65px;
+}
+
+#searchLogo{
+	position: relative;
+	left: 30px;
+	width: 88px;
+	height:84px;
+	float: left;
+	margin-top: -10px;
+	background-color:rgb(226,222,224);
+}
+#searchLogo img{
+	/*vertical-align: middle;*/
+	padding:33px;
+}
+
+/*******************登录框******************/
+#loginBox{
+	width:354px;
+	height:84px;
+	background-color: rgb(233,78,56);
+	float:right;
+	margin-top: -10px;
+}
+#loginBox img{
+	padding: 33px;
+	float:left;
+}	
+#loginBox p{
+	float: left;
+	padding: 20px 0 0 0;
+}
+
+/*遮罩层的样式*/
+#mask{
+  /*本层要实现覆盖模式窗口以外全部内容的半透明效果*/
+  background-color:#D1C9C9;
+  position: absolute ;
+  top:0;
+  left:0;
+  z-index:40;
+  width: 100%;
+  height: 100%;
+  display:none; 
+  filter:alpha(opacity=10);	
+  opacity: 0.2; 
+}  
+
+/*登录框的设置*/
+.enter{
+/*本层显示在最前端，其它控件均不可用*/
+width:500px;
+height:300px;
+position:absolute;
+left: 600px;	
+top: 200px;
+z-index:42;
+display: none;
+border:1px inset black;
+background-color:#FCF9F9;
+}
+
+/*登录框里面的设置*/
+#div3{
+	width:100%;
+	height:40px; 
+	background-color:#CBC7C7;
+	text-align: center;
+	line-height: 40px;	
+}
+#div3 label{
+	font-size: 20px;
+	cursor: pointer;
+	float: right;
+}
+#div3 label:hover{
+	opacity: 0.6;
+}
+#username,
+#password{
+	height: 30px;
+	position: absolute;
+	left: 20%;
+	top: 20%;
+	border: 2px solid #939191;
+	color: #939191;
+	border-radius: 15px;
+	-webkit-appearance: none; 
+  -moz-appearance: none; 
+}
+#password{
+  top: 40%;
+}
+.username,
+.password{
+	display: block;
+	height: 30px;
+	position: absolute;
+	line-height: 30px;	
+	left: 10%;
+	top: 20%;
+}	
+.password{
+	top: 40%;
+}
+/*#div3 button{
+	display: none;
+}*/
+#ok{
+	-webkit-appearance: none; 
+  -moz-appearance: none; 
+  width: 60px;
+  height: 30px;
+  border-radius: 20px;
+  background: #C4BDBD;
+  position: absolute;
+  top: 60%;
+  left: 45%;
+  line-height: 15px;
+  cursor: pointer;
+
+}
+#ok:hover{
+	background: #8F8E8E;
+	color: #fff;
+}
+#count{
+	display: none;
+	position: absolute;
+	right: 21%;
+	bottom: 60%;
+	color: black;
+
+
+}
+/*******************登录框******************/
+
+/*.headerMeunItem a:link,
+#loginBox a:link,
+.filterWord a:link,
+#filterSelectContanier a:link,*/
+.headerMeunItem a:visited,
+#loginBox a:visited,
+.filterWord a:visited,
+#filterSelectContanier a:visited{
+	color: #B6ACAC;	
+	background: #D1CACA;
+}
+
+.headerMeunItem a:hover,
+.filterWord a:hover,
+#filterSelectContanier a:hover{
+	color: #F6420F;
+	background: #D1CACA;
+}
+#loginBox>a:hover{
+	color: white;
+}
+#headerLogin a:hover img{
+opacity: 0.7;
+}
+.headerMeunItem a:active{
+	color: #B6ACAC;
+	background: #D1CACA;
+}
+/********这里是对导航栏鼠标经过的样式设置********/
+/*------------------------------------------------------*/
+
+/***************这里是search的样式****************/
+/*-------图片轮播的思路：用css3？js？*/
+.imageRotation{
+    height:347px;
+    width:1170px;
+    overflow:hidden; 
+    position:relative;  /*--相对定位--*/
+    border-radius: 5px;	
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    margin: 0 auto;
+
+    }
+.imageBox{
+    position:absolute;  /*--固定定位--*/
+    height:395px;
+    top:-40px;
+    left:0px;
+    overflow:hidden;
+    z-index: -100;
+    }
+.imageBox img {
+    display:block;
+    height:395px;
+    width:1170px;
+    float:left; /*让图片并联*/
+    border:none;
+    z-index: -100;
+    }
+.icoBox{
+    position:absolute;  /*--固定定位--*/
+    bottom:4px;
+    left:45%;
+    width:1170px;
+    height:10px;
+    text-align:center;
+    line-height:40px;
+ }
+.icoBox span{
+    display:block;
+    float:left;
+    height:12px;
+    width:12px;
+    margin-left:3px;
+    overflow:hidden;
+    border-radius: 50px;
+    background: #7D7B7B;
+    cursor:pointer;
+    margin: 0 15px;
+  }
+.icoBox span.active {
+    background-position:0px -12px;
+    cursor:default;
+    z-index: -100;
+    background: #FFFFFF;
+ }
+ /*------ 图片轮播--------  */
+
+#search{
+	width:1170px;
+	height:387px;
+	margin: 0 auto;
+	text-align: center;
+	background: url(mask.png) no-repeat;
+	position: relative;
+	top: -7px;
+}
+#search a{
+    font-size: 20px;
+    color: #FFFFFF;
+}
+.chooseCountryArtBox{
+	width: 1170px;
+	margin:0px auto;
+	padding: 0 15px;
+	float: left;
+	position: absolute;
+	top:80px;
+	height:250px;	
+}
+.chooseCountryArtBox>h2{
+	font-family:SimHei;
+	font-weight: normal;
+	font-size:40px;
+	line-height:20px;	
+	color:white;
+	position:relative;
+	top:-60px;
+}
+/*********对选择框的设置*********/
+#chooseCountry,
+#selectCountry,
+#chooseArt,
+#selectArt{
+		width: 170px;
+   border-radius: 25px; 
+   border: 1px solid #333;
+   line-height:45px;
+   opacity:0.8;
+}
+#chooseArt,
+#chooseCountry{
+	height:45px;
+	background: url("duhoot_0003s_0003_.png") #878484 no-repeat 145px 20px;
+	position: relative;
+	float: right;
+	bottom:65px;
+	right: 350px;
+	color: #FFFFFF;	
+
+}
+#chooseCountry{
+   float: left;
+   left:300px; 
+   margin: 0;
+	padding: 0;
+}
+#selectCountry,
+#selectArt{
+    height: 185px;
+    list-style-type: none;
+    position:absolute;
+    top:65px;
+    left:290px;
+    margin: 0 auto; 
+    background:#878484; 
+    z-index: 100;
+    display: none;/*++++++关键点+++++++*/ 
+      
+}
+#selectArt{
+	right:0px;
+}
+
+#selectCountry li,#selectArt li{
+	width: 150px;
+	margin: 0;
+	padding: 0;
+  line-height: 30px;
+  margin: 10px 0 0  -10px;
+  border-bottom: 1px solid #333;  
+}
+#search a:hover{
+    color: #E93F23;
+}
+
+/*********对选择框的设置*********/
+#inputContanier{	
+	position: absolute;
+	bottom: 150px;
+	left: 330px;
+	float: left;
+}
+.inputBox{
+	border: solid 1px white;
+	border-radius: 25px;
+	height:51px;
+  -webkit-appearance: none; 
+  -moz-appearance: none;       
+  width: 471px;
+  text-indent: 0.01px;           
+  padding-left: 1em;
+	font-size: 1em;
+	color: black;
+	opacity:0.6;	
+	float: left;
+	line-height: 51px;
+}
+#search  a:hover,
+#search  a:active{
+	text-shadow: 1px 1px 10px white;
+	transition: 0.8s;
+}     
+#button{
+    margin:0 auto;
+    position: absolute;
+    left:45%;
+    bottom:80px; 
+    width: 138px;
+    height: 63px;
+    background-color: rgb(233,78,56);
+    border-radius: 31px;  
+    box-shadow: 2px 2px 5px #888888; 
+    float: left;  
+}
+#button p{
+	font-size: 20px;
+	color: white;
+}
+#search a{
+ font-size: 15px;   
+}
+/*-------------------------------------------------------------------------*/
+#filter{
+	margin:0em auto;
+	padding:0 15px;
+	width:1170px;
+	height: 81px;
+	min-width:60%;
+	position: relative;
+/*	top: -40px;*/
+/*	left: 18%;*/
+	line-height:40px;
+}
+#filterBox{
+	padding: 0 15px;
+	margin-top:20px;
+}
+.filterWord li{
+	list-style: none;
+	padding:0 12.5px;
+	font-size: 10px;
+	color: rgb(150,165,167);
+	float: left;
+}
+
+#filterSelectContanier{
+	height: 39px;
+	width: 114px;
+	margin:0px 0 0 100px;
+   border-radius: 25px;
+   border: 1px solid #333;
+   padding-left:10px;
+	 cursor: pointer;
+   background: url("down.png") no-repeat 100px 15px;
+   float: left;
+   color:#B3AFAF;
+   font-size: 15px;
+   line-height:40px;
+   opacity:0.5;
+}
+.hidnMap{
+  border: 1px solid rgb(27, 175, 93);
+  border-radius: 25px;
+  background-color: rgb(27, 175, 93);
+  width: 124px;
+  height: 39px;
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  float: left;
+  margin-left: 10px;
+  line-height: 39px;
+}
+.hidnMap img{
+	float: right;
+	position: relative;
+	top:10px; 
+	right: 10px;
+}
+.hidnMap a:link,
+.hidnMap a:visited{
+	color: white;
+}
+.hidnMap a:hover{
+	color:#E93F23; 
+}
+.filterLogo{
+	float:right;
+	margin: 0 auto;
+	list-style: none;
+	padding:0 1em;
+}
+.filterLogo li{
+	float: left;
+	margin-left: 15px;
+}
+#filterLogo span{
+	float: left;
+	position: relative;
+	left: 100px;
+	color: rgb(150,165,167);
+}
+
+/*--------------------------------------------------*/
+
+/*#post{
+	position: relative;
+}*/
+.post{
+	width:1100px;
+	margin: 0 auto;
+	min-width: 60%;	
+}
+.post li{
+	position: relative;
+	padding:0 25px;
+	width: 210px;
+	height: 275px;
+	display: list-item;
+	list-style: none;
+	float: left;
+	margin: 0 5px;
+}
+#postEnlarge{
+	width:1000px;/*显示宽度*/
+	height:720px;/*显示高度*/
+	position:absolute;
+	left: 600px;	
+	top: 200px;
+	z-index:100;/*优先级*/
+	display: none;
+}
+.topHouse{
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	left: 40%;
+	top: 43%;
+	text-align: center;
+	z-index: 30;
+	background:#18AF5D;
+	border:3px solid white;
+	border-radius: 50px;
+	line-height: 60px;
+}
+.postImg{
+	position: relative;
+	border-top-radius:0 5px;
+	height:150px;
+	width: 215px;
+	background: url("postHouse.png");
+	background-size: cover;
+	position: relative;
+	border-bottom: 4px solid #1baf5d;
+}
+.topHouse:hover {
+	opacity: 0.8;
+	border:3px solid #E4E4E4;
+	background: #40F047;
+}
+.price{
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	padding:5px 10px;
+	border-radius: 35px;
+	background: #1baf5d;
+	color: white;
+}
+.hoverMask{
+	width: 100%;
+	height: 100%;
+	border-top-right-radius: 0 5px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 25;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	background: #1baf5d;
+}
+.hoverMask>a{
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 35px;
+	border: 3px solid #fff;
+	display: inline-block;
+	transition: all 0.5s ease;
+	margin-top: 20%;
+}
+
+.hoverMask:hover{
+opacity: 0.8
+}
+.hoverMask>a:hover{
+	color: #1baf5d;
+	background: #fff;
+}
+
+.postHouseInformnation h2{
+	height: 50px;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 30px;
+}
+.postHouseInformnation p{
+	text-align: center;
+	color: #1baf5d;	
+	font-family: KaiTi;
+}
+.postHouseInformnation img{
+	position: relative;
+	left: 70px;
+}
+.postHouseInformnation h2 a:link,
+.postHouseInformnation h2 a:visited{
+	color: #566375;
+}
+.postHouseInformnation h2 a:hover{
+	color: #DB440E;
+}
+.postHouseInformnation p a:link,
+.postHouseInformnation p a:visited{
+	color: #1BAF5D;
+	font-size: 15px;
+}
+.postHouseInformnation p a:hover{
+	color: #DB440E;
+	font-size: 15px;
+}
+.readMore{
+	width: 1110px;
+	margin: 0 auto;
+}
+.readMore li{
+	position: relative;
+	padding: 40px 40px;
+	width:452px;
+	height: 269px;
+	display: list-item;
+	float: left;
+	list-style: none;
+}
+.readMoreImg{
+	position: relative;
+}
+.informnation{
+	text-align: center;
+}
+.readMorePriPg img{
+	margin:0 20px;
+	float: left;
+}
+.readMoreWordContanier{
+	float: left;
+	word-break:break-word;
+	width: 300px;
+	font-family: KaiTi;
+}
+.readMoreWordContanier>p{
+	font-size: 17px;
+
+}
+.readMorePriPg h2{
+	display: inline;
+	font-size: 16px;
+}
+.postLast>li{
+	position: relative;
+	top: 40px;
+}
+.readMoreWordContanier p span,
+.readMoreWordContanier p ,#post a:link, 
+.readMoreWordContanier p span,
+.readMoreWordContanier p ,
+#post a:visited{
+	color: #566375;
+}
+.readMoreWordContanier p span,
+.readMoreWordContanier p,#post a:hover{
+	color: #F96136;
+}
+.loadMoreLink{
+	margin: 0 auto;
+	font-size: 20px;
+	width: 1170px;
+	text-align: center;
+	display: table;
+	padding: 20px 30px;
+	font-size: 18px;
+
+}
+/***********过渡效果********/
+.rotation{
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+/*--------------------------------------------------*/
+#footer{
+	background: url(footbg.png) no-repeat;
+	width: 1170px;
+	height: 500px;
+	margin: 0 auto;
+	padding: 30px 0;
+	position: relative;
+	top: 200px;
+	text-align: center;
+}
+#offer,
+.reality{
+	font-size: 20px;
+	margin: 0 auto;
+	width: 817px;
+	text-align: center;
+}
+#offer h2{
+	font-family: KaiTi;
+	color:#566375; 
+	font-size: 30px;
+}
+#offer p{
+	color: #566375;
+	font-family: KaiTi;
+}
+.fiveLogoList{
+	margin-top: 50px;
+	width: 817px;
+	height: 176px;
+}
+.fiveLogoList li{
+	float: left;
+	list-style: none;
+	padding: 20px;
+}
+.offerContanier{
+	margin: 0 auto;
+	width:817px;
+}
+.offerLeft{
+	width: 368px;
+	height: 151px;
+	float: left;
+	margin: 10px 20px;
+
+}
+.offerLeft img{
+	float: left;
+}
+.offerLeft p{
+	word-break:break-all;
+	margin:0 0 0 68px;
+	font-family: KaiTi;
+	color: #566375;
+	font-size:16px;
+}
+.reality{
+	font-family: KaiTi;
+	font-size: 25px;
+	margin: 40px 0;
+	display: block;
+	text-decoration: none;
+
+}
+.offerContanier a:link,
+.offerContanier a:visited{
+	color: #566375;
+}
+.offerContanier a:hover{
+	color: #1DB05E;
+}
+
+.footerContanier{
+	margin: 0 auto;
+	padding: 0 15px;
+	font-family:KaiTi;
+}
+
+#footer h2{
+	text-align: center;
+	color: white;
+	margin:0 80px;
+	font-size: 22px;
+	font-weight: bold;
+	position: relative;
+	bottom: 110px;
+}
+#subscribeContanier{
+	position: relative;
+	bottom: 80px;
+	left: 28%;
+}
+#subscribeButter{
+    margin-left:710px;
+    position: relative;
+    bottom: 95px; 
+    width: 110px;
+    height: 54px;
+    background-color: rgb(233,78,56);
+    border-radius: 31px;  
+    box-shadow: 2px 2px 5px #888888;            
+}
+#subscribeButter>p{
+	text-align: center;
+	font-size: 15px;
+	padding: 18px;
+	color: white;
+	
+}
+/*#subscribeButter p:link ，
+#subscribeButter p:visited{
+		color: #B0ACAC;
+	 font-size:15px;
+	 text-decoration: none;
+}*/
+#subscribeButter>p:hover {
+   ` color: #050505;
+     font-size:15px;
+     text-decoration: none;
+  }
+#footer hr{
+	position: relative;
+	bottom:40px;
+	width: 810px;
+}
+.ipsum{
+	float: left;
+	margin: 0 100px;
+	color: white;
+	position: relative;
+	left: 30px;
+	bottom: 40px;
+}
+.ipsum ul{
+	list-style: none;
+	text-align:left;
+	font-size: 15px;
+}
+.ipsum h3{
+	text-align:center;
+	text-decoration: underline;
+	padding-right: 15px;
+	position: relative;
+	left: 10px;
+}
+.social{
+	float: left;
+	margin: 0 100px;
+	color: white;
+	position: relative;
+	bottom: 40px;
+}
+.social p{
+	font-size: 10px;
+}
+.social h3{
+	text-decoration: underline;
+}
+.socialLogo li{
+	float: left;
+	padding: 10px;
+	list-style: none;
+	position: relative;
+	right: 25px;
+}
+
+
+
+
